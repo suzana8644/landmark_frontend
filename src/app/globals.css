@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+input {
+  outline: none;
+}
+
+/* scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* circleAnimation.module.css */
+
+.circularAnimation {
+  animation: circularAnimation 7s infinite;
+}
+
+@keyframes circularAnimation {
+  0% {
+    transform: translate(0, 40%);
+  }
+  50% {
+    transform: translate(50%, -20%);
+  }
+  100% {
+    transform: translate(0, 40%);
+  }
+}

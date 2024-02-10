@@ -1,0 +1,57 @@
+{
+  "courses": [
+    {
+      "id": "number",
+      "title": "string",
+      "duration": "string",
+      "count": "string",
+      "image": "string",
+      "lessons": [
+        {
+          "title": "string",
+          "duration": "string",
+          "id": "string",
+          "image": "string",
+          "description": "string"
+        }
+      ],
+      "description": "string"
+    }
+  ],
+  "dummyLessons": [
+    {
+      "title": "string",
+      "duration": "string",
+      "description": "string",
+      "image": "string"
+    }
+  ],
+  "module1Details": [
+    {
+      "id": "string",
+      "image": "string",
+      "description": "string"
+    }
+  ],
+  "module2Details": [
+    {
+      "id": "string",
+      "image": "string",
+      "description": "string"
+    }
+  ],
+  "module3Details": [
+    {
+      "id": "string",
+      "image": "string",
+      "description": "string"
+    }
+  ],
+  "module4Details": [
+    {
+      "id": "string",
+      "image": "string",
+      "description": "string"
+    }
+  ]
+}
