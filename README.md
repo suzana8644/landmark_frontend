@@ -4,7 +4,7 @@ This is a web app for Landmark Decor.
 First, clone the repo with:
 
 ```bash
-git clone https://github.com/dhirajphuyal/landmark-frontend.git
+git clone git@github.com:suzana8644/landmark_frontend.git
 ```
 
 Then, create a new .env file with following values assigned:
