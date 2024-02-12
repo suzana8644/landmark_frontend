@@ -1,16 +1,18 @@
 "use client";
 
-import React, {ChangeEvent, useRef, useState} from "react";
-import {useRouter} from "next/navigation";
-import {instance} from "../../../config/axios";
+import React, { ChangeEvent, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { instance } from "../../../config/axios";
 import axios from "axios";
-import {CircularProgress, TextField} from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
 
 interface CommunicationDetails {
     firstName: string,
     lastName: string;
     phoneNumber: string;
     message: string;
+    email: string;
+    emailError: string;
     firstNameError: string;
     lastNameError: string;
     phoneNumberError: string;
@@ -24,6 +26,8 @@ const ConnectPage = () => {
         lastNameError: "",
         firstName: "",
         lastName: "",
+        email: "",
+        emailError: "",
         phoneNumber: "",
         message: ""
     });
@@ -38,6 +42,7 @@ const ConnectPage = () => {
                 lastName: communicationDetails.lastName,
                 phoneNumber: communicationDetails.phoneNumber,
                 message: communicationDetails.message,
+                email: communicationDetails.email
             });
             if (res) {
                 setLoading(false);
@@ -46,7 +51,7 @@ const ConnectPage = () => {
                     firstNameError: "",
                     lastNameError: "",
                     phoneNumberError: "",
-
+                    emailError: "",
                 });
                 localStorage.setItem("token", res?.data);
                 router.push("/home");
@@ -91,7 +96,12 @@ const ConnectPage = () => {
                 ...prevDetails,
                 phoneNumberError: "Please enter your phone number",
             }));
-        } else {
+        } else if (!communicationDetails.email) {
+            setCommunicationDetails((prevDetails) => ({
+                ...prevDetails,
+                emailError: "Please enter your email as well.",
+            }));
+        }  else {
             postSubmit();
         }
     };
@@ -104,18 +114,18 @@ const ConnectPage = () => {
 
     return (
         <div className="px-5 py-[100px] md:px-0 md:py-0">
-      <span className="text-2xl md:text-3xl font-bold">
-        {`We'd love to help you out`}
-      </span>
-            <div className="flex items-center justify-center mt-4 md:mt-8">
+            <span className="text-2xl md:text-3xl font-bold">
+                {`We'd love to help you out`}
+            </span>
+            <div className="flex items-center justify-left mt-4 md:mt-8">
                 <div className="flex flex-col gap-4 md:gap-6">
-          <span className="text-xl md:text-2xl font-semibold">
-            Please fill out this form
-          </span>
+                    <span className="text-xl md:text-2xl font-semibold">
+                        Please fill out this form
+                    </span>
                     <div className="flex flex-col gap-4">
                         <TextField
                             size="small"
-                            sx={{ width: "100%" }}
+                            sx={{ width: "150%" }}
                             error={communicationDetails.firstName.length < 1}
                             helperText={communicationDetails.firstNameError}
                             onChange={handleCredentialsChange}
@@ -136,7 +146,7 @@ const ConnectPage = () => {
                         />
                         <TextField
                             size="small"
-                            sx={{ width: "100%" }}
+                            sx={{ width: "150%" }}
                             error={communicationDetails.lastName.length < 1}
                             helperText={communicationDetails.lastNameError}
                             onChange={handleCredentialsChange}
@@ -157,7 +167,7 @@ const ConnectPage = () => {
                         />
                         <TextField
                             size="small"
-                            sx={{ width: "100%" }}
+                            sx={{ width: "150%" }}
                             error={communicationDetails.phoneNumber.length < 10}
                             helperText={communicationDetails.phoneNumberError}
                             onChange={handleCredentialsChange}
@@ -177,11 +187,32 @@ const ConnectPage = () => {
                             }}
                         />
                         <TextField
+                            size="small"
+                            sx={{ width: "150%" }}
+                            error={communicationDetails.email.length < 1}
+                            helperText={communicationDetails.emailError}
+                            onChange={handleCredentialsChange}
+                            value={communicationDetails.email}
+                            name="email"
+                            placeholder="Your Email"
+                            onKeyDown={handleEnter}
+                            InputProps={{
+                                sx: {
+                                    borderRadius: "34px",
+                                    padding: "10px 15px",
+                                    fontSize: "18px",
+                                    backgroundColor: "#F2FFFB",
+                                    border: "none",
+                                },
+                                disableUnderline: true,
+                            }}
+                        />
+                        <TextField
                             size="medium"
                             multiline
                             rows={4}
                             maxRows={7}
-                            sx={{ width: "100%" }}
+                            sx={{ width: "150%" }}
                             onChange={handleCredentialsChange}
                             value={communicationDetails.message}
                             name="message"

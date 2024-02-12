@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { CircularProgress, Alert, } from "@mui/material";
 import { instance } from "../../../../../config/axios";
+import { toast } from 'react-toastify';
+import Link from "next/link";
 
 type Decoration = {
     title: string
@@ -15,166 +16,64 @@ type Decoration = {
 
 export default function Decorator() {
 
-    const [loading, setLoading] = useState(false);
-    const [decorators, setDecorators] = useState<{ name: string, id: string }[]>([]);
-    const [formData, setFormData] = useState({
-        decoratorId: '',
-        title: '',
-        description: '',
-        themes: '',
-        images: '',
-        categories: 'Category 1',
-        startDate: '',
-        endDate: '',
-        price: '',
-    });
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { id, value } = e.target;
-        setFormData(prevState => ({
-            ...prevState,
-            [id]: value
-        }));
-    };
+    const [decoration, setDecoration] = useState<Decoration[]>([]);
 
     useEffect(() => {
-        // Simulated API call to fetch decorators
-        // Replace this with your actual API call to fetch decorators
-        const fetchDecorators = async () => {
-            // Simulated data, replace with actual fetching logic
-            const decorators = await instance.get("/api/decorators");
-            const fetchedDecorators = decorators.data.map((d: any) => ({ name: d.userId.username, id: d.userId._id }));
-            setDecorators(fetchedDecorators);
-        };
-
-        fetchDecorators();
+        const fetchDecorations = async () => {
+            try {
+                const decorations = await instance.get("/api/decorations");
+                setDecoration(decorations.data);
+            } catch (error) {
+                toast.error("Error fetching decorations");
+            }
+        }
+        fetchDecorations();
     }, []);
 
-    const handleSubmit = async () => {
-        try {
-            setLoading(true);
-            const res = await instance.post("/decorations", {
-                title: formData.title,
-                description: formData.description,
-                themes: formData.themes.split(','),
-                images: formData.images.split(','),
-                categories: formData.categories,
-                availability: { from: new Date(formData.startDate), to: new Date(formData.endDate) },
-                price: formData.price
-            });
-
-            if (res) {
-                setLoading(false);
-                setFormData({
-                    decoratorId: '',
-                    title: '',
-                    description: '',
-                    themes: '',
-                    images: '',
-                    categories: 'Category 1',
-                    startDate: '',
-                    endDate: '',
-                    price: '',
-                });
-            }
-
-        } catch (error) {
-
-        }
-    };
-
     return (
-        <form className="w-full max-w-lg">
-            <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="decoratorId">
-                        Decorator ID
-                    </label>
-                    <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="decoratorId" onChange={handleChange}>
-                        <option value="">Select Decorator</option>
-                        {decorators.map(decorator => (
-                            <option key={decorator.id} value={decorator.id}>{decorator.name}</option>
-                        ))}
-                    </select>
+        <>
+            <div className="flex flex-col gap-10">
+                <div>
+                    <span className="text-3xl font-black text-left">Decoration List</span>
                 </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="title">
-                        Title
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="title" type="text" placeholder="Enter Title" onChange={handleChange} />
-                </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="description">
-                        Description
-                    </label>
-                    <textarea className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="description" placeholder="Enter Description" onChange={handleChange}></textarea>
-                </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="themes">
-                        Themes
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="themes" type="text" placeholder="Enter Themes (comma-separated)" onChange={handleChange} />
-                </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="images">
-                        Images
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="images" type="text" placeholder="Enter Images (comma-separated)" onChange={handleChange} />
-                </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="categories">
-                        Categories
-                    </label>
-                    <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="categories" onChange={handleChange}>
-                        <option>Category 1</option>
-                        <option>Category 2</option>
-                        <option>Category 3</option>
-                    </select>
-                </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="startDate">
-                        Start Date
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="startDate" type="date" onChange={handleChange} />
-                </div>
-                <div className="w-full md:w-1/2 px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="endDate">
-                        End Date
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="endDate" type="date" onChange={handleChange} />
-                </div>
-            </div>
-            <div className="flex flex-wrap -mx-3 mb-6">
-                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="price">
-                        Price
-                    </label>
-                    <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="price" type="number" placeholder="Enter Price" onChange={handleChange} />
-                </div>
-                <div className="w-full md:w-1/4 px-3">
-                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="price">
-                        <button
-                            onClick={handleSubmit}
-                            className="rounded-full py-3 px-6 md:py-4 md:px-8 bg-landmark-light text-black text-lg md:text-xl hover:bg-yellow-400 focus:outline-none"
-                        >
-                            {loading ? <CircularProgress size={25} /> : "Submit"}
+                <div>
+                    <Link href={'/admin/dashboard/decoration/add'}>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Add Decoration
                         </button>
-                    </label>
+                    </Link>
                 </div>
+                <div>
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full border-collapse border border-gray-300">
+                            <thead>
+                                <tr>
+                                    {/* Example column headers */}
+                                    <th className="border border-gray-300 px-4 py-2">S.No</th>
+                                    <th className="border border-gray-300 px-4 py-2">Title</th>
+                                    <th className="border border-gray-300 px-4 py-2">Theme</th>
+                                    <th className="border border-gray-300 px-4 py-2">Description</th>
+                                    <th className="border border-gray-300 px-4 py-2">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {decoration.map((item, index) => (
+                                    <tr key={index}>
+                                        {/* Example data cells */}
+                                        <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
+                                        <td className="border border-gray-300 px-4 py-2">{item.title}</td>
+                                        <td className="border border-gray-300 px-4 py-2">{item.themes}</td>
+                                        <td className="border border-gray-300 px-4 py-2">{item.description}</td>
+                                        <td className="border border-gray-300 px-4 py-2">{item.price}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
-        </form>
-    );
+        </>
+    )
 
 }
