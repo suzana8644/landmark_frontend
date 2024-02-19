@@ -5,21 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="939ce898-f851-48a8-9c95-790a074144e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/whatsapp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/eventCategories/[categoryId]/loadingSkeleton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/eventCategories/[categoryId]/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/api/theme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next-env.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/dashboard/organizers/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/eventCategory/[eventCategoryId]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchCategories.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchImages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchOrganizers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchThemes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/raw-data/nav-links.js" beforeDir="false" afterPath="$PROJECT_DIR$/raw-data/nav-links.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/event/[eventId]/loadingSkeleton.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/event/[eventId]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/event/[eventId]/theme/[themeId]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/events/EventAccordion.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/events/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/components/sideNav.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/user/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/eventCategories/EventAccordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/eventCategories/EventAccordion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/eventCategories/[categoryId]/loadingSkeleton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/eventCategories/[categoryId]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/gallery/GalleryAccordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gallery/GalleryAccordion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/navbar/NavBarComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/navbar/NavBarComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/themes/[themeId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/themes/[themeId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/api/theme.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,14 +38,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="tsconfig.json" />
+        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
   <component name="FormatOnSaveOptions">
-    <option name="myRunOnSave" value="false" />
     <option name="myAllFileTypesSelected" value="true" />
     <option name="mySelectedFileTypes">
       <set />
@@ -62,9 +69,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/dhirajphuyal/Sujana/landmark_decor/frontend/src/app/eventCategories/[categoryId]",
     "node.js.detected.package.eslint": "true",
@@ -72,7 +81,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "prettierjs.PrettierConfiguration.Package": "/Users/dhirajphuyal/Sujana/landmark_decor/frontend/node_modules/prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
     "ts.external.directory.path": "/Users/dhirajphuyal/Sujana/landmark_decor/frontend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -128,17 +139,12 @@
       <workItem from="1708097389278" duration="2165000" />
       <workItem from="1708099680618" duration="2215000" />
       <workItem from="1708141517556" duration="6930000" />
-      <workItem from="1708261011908" duration="16027000" />
+      <workItem from="1708261011908" duration="36447000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/src/pages/api/theme.js" />
-      </list>
-    </option>
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
