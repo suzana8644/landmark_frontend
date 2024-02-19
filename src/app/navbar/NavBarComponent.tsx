@@ -14,7 +14,7 @@ import { Logout } from "@mui/icons-material";
 import { createSourceMapSource } from "typescript";
 
 interface User {
-  exp: number,
+  exp: number;
   user: UserInfo;
 }
 
@@ -22,11 +22,10 @@ interface UserInfo {
   firstName: string;
   lastName: string;
   id: string;
-  role: string,
+  role: string;
 }
 
 const NavBarComponent = () => {
-
   const router = useRouter();
   const currentPath = usePathname();
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -73,8 +72,8 @@ const NavBarComponent = () => {
   };
 
   const adminDashboard = () => {
-    router.push("/admin/dashboard")
-  }
+    router.push("/admin/dashboard");
+  };
 
   const scrollToSection = () => {
     if (currentPath !== "/") {
@@ -87,7 +86,7 @@ const NavBarComponent = () => {
     }
   };
 
-  //render the sign in button only when the user is admin
+  //render the sign in button only when the organizers is admin
   const renderSignInButton = () => {
     if (currentPath.includes("/admin")) {
       return (
@@ -115,11 +114,10 @@ const NavBarComponent = () => {
               Sign In
             </button>
           )}
-
         </>
-      )
+      );
     }
-  }
+  };
 
   return (
     <>
@@ -157,13 +155,13 @@ const NavBarComponent = () => {
                 key={index}
                 // size="small"
                 onClick={() => handleRouteChange(nav.path)}
-                className={`hover:border-b hover:border-landmark-dark hover:border-b-1 text-[14px] text-black ${nav.path === currentPath && "font-bold"
-                  }`}
+                className={`hover:border-b hover:border-landmark-dark hover:border-b-1 text-[14px] text-black ${
+                  nav.path === currentPath && "font-bold"
+                }`}
               >
                 {nav.name}
               </button>
             ))}
-
 
             {renderSignInButton()}
             {/* {userInfo && currentPath.includes('/admin') ? (
