@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="939ce898-f851-48a8-9c95-790a074144e8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/whatsapp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/eventCategories/[categoryId]/loadingSkeleton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/eventCategories/[categoryId]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/api/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/raw-data/nav-links.js" beforeDir="false" afterPath="$PROJECT_DIR$/raw-data/nav-links.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/event/[eventId]/loadingSkeleton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/event/[eventId]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/event/[eventId]/theme/[themeId]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/events/EventAccordion.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/events/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
+        <option value="tsconfig.json" />
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2a50Rr8mpcg2csPshcqJmwvTxS0" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/dhirajphuyal/Sujana/landmark_decor/frontend/src/app/eventCategories/[categoryId]",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/dhirajphuyal/Sujana/landmark_decor/frontend/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/eventCategories/[categoryId]" />
+      <recent name="$PROJECT_DIR$/src/app/users" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="lint" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.lint" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="939ce898-f851-48a8-9c95-790a074144e8" name="Changes" comment="" />
+      <created>1703593128477</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703593128477</updated>
+      <workItem from="1703593130699" duration="7845000" />
+      <workItem from="1703606402054" duration="2262000" />
+      <workItem from="1705205759690" duration="1235000" />
+      <workItem from="1705219250807" duration="1334000" />
+      <workItem from="1705243471444" duration="3441000" />
+      <workItem from="1705370547120" duration="1316000" />
+      <workItem from="1705498644029" duration="1967000" />
+      <workItem from="1706509813883" duration="4062000" />
+      <workItem from="1706664727147" duration="18370000" />
+      <workItem from="1706698377347" duration="176000" />
+      <workItem from="1707011858419" duration="140000" />
+      <workItem from="1707924659504" duration="521000" />
+      <workItem from="1707926059181" duration="97000" />
+      <workItem from="1708022741181" duration="1721000" />
+      <workItem from="1708097389278" duration="2165000" />
+      <workItem from="1708099680618" duration="2215000" />
+      <workItem from="1708141517556" duration="6930000" />
+      <workItem from="1708261011908" duration="16027000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/pages/api/theme.js" />
+      </list>
+    </option>
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+</project>

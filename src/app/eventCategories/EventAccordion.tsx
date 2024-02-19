@@ -38,7 +38,7 @@ const EventAccordion = () => {
           >
             <div
               className="flex flex-col md:flex-row items-center gap-4 md:gap-10 w-full md:p-3 md:p-5"
-              onClick={() => router.push(`event/${event.id}`)}
+              onClick={() => router.push(`eventCategories/${event.id}`)}
             >
               <div className="flex w-1/2 w-[100%] md:w-[30%] justify-center">
                 <Image

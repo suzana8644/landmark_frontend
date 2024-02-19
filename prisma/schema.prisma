@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model EventCategory {
+  eventCategoryId String @id @default(cuid()) @map("_id")
+  name       String
+  description String
+  image       String
+  themes     Theme[]
+}
+
+model Organizer {
+  organizerId     String @id @default(cuid()) @map("_id")
+  email           String
+  name            String
+  phoneNumber     String
+  whatsappId      String
+  themes          Theme[]
+}
+
+model Theme {
+  themeId   String @id @default(cuid()) @map("_id")
+  name      String
+  image     String
+  description String
+  price     Float
+  additionalDetails String
+  organizer Organizer @relation(fields: [organizerId], references: [organizerId])
+  organizerId String //references to Organizer
+  eventCategoryId String //references to EventCategory
+  eventCategory EventCategory @relation(fields: [eventCategoryId], references: [eventCategoryId])
+}
+
+//Model for a customer with a unique id and a name
+model Customer {
+  customerId   String   @id @default(cuid()) @map("_id")
+  name        String
+  phoneNumber String
+  bookings    Booking[]
+}
+
+model Booking {
+  bookingId   String   @id @default(cuid()) @map("_id")
+  customerId  String  //References to Customer
+  themeId    String?  //References to Theme
+  date        DateTime
+  status      String
+  notes       String
+  customer    Customer @relation(fields: [customerId], references: [customerId])
+}

@@ -8,7 +8,7 @@ const Dashboard = () => {
 
     console.log(router);
     const playerRef = useRef(null);
-    const user = window.localStorage.getItem("token");
+    const user = typeof window !== 'undefined' ? window.localStorage.getItem('token') : null;
 
     if (!user) {
         router.push("/admin/login");

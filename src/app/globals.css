@@ -53,3 +53,11 @@ input {
     transform: translate(0, 40%);
   }
 }
+
+.thumbs .swiper-slide {
+  opacity: 0.25;
+}
+
+.thumbs .swiper-slide-thumb-active {
+  opacity: 1;
+}
