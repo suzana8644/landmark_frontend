@@ -18,6 +18,13 @@ model EventCategory {
   themes     Theme[]
 }
 
+model Image {
+  imageId   String @id @default(cuid()) @map("_id")
+  url       String
+  themeId   String
+  theme     Theme @relation(fields: [themeId], references: [themeId])
+}
+
 model Organizer {
   organizerId     String @id @default(cuid()) @map("_id")
   email           String
@@ -30,7 +37,7 @@ model Organizer {
 model Theme {
   themeId   String @id @default(cuid()) @map("_id")
   name      String
-  image     String
+  image     Image[]
   description String
   price     Float
   additionalDetails String
