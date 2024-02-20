@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { instance } from "../../../../../config/axios";
 import { toast } from "react-toastify";
 
@@ -17,7 +17,7 @@ export default function User() {
   // State to manage organizers data
 
   const [organizers, setOrganizers] = useState<Organizer[]>([]);
-  const [form, setForm] = useState<'update' | 'add' | null>(null);
+  const [label, setLabel] = useState<'Update' | 'Add'>('Add');
   const [toUpdate, setToUpdate] = useState<Organizer>();
 
   useEffect(() => {
@@ -37,16 +37,17 @@ export default function User() {
 
   // State to manage form visibility
   const [showForm, setShowForm] = useState(false);
+  const [updateFormId, setUpdateFormId] = useState('');
 
-  const toggleUpdate = (type: string, organizer: Organizer) => {
-    setForm('update');
-    setShowForm(!showForm); 
-    setToUpdate(organizer);
-  }
   // Function to toggle form visibility
-  const toggleForm = () => {
+  const toggleForm = (label?: 'Add' | 'Update', body?: any) => {
+    if(label === 'Update' && showForm){
+      setToUpdate(body);
+      setUpdateFormId(body.organizerId);
+      return setLabel(label); 
+    }
     setShowForm(!showForm);
-    setForm('add');
+    setLabel('Add');
   };
 
   const updateOrganizer = async (body: any) => {
@@ -125,7 +126,7 @@ export default function User() {
               <td className="border border-gray-400 p-4">
                 {/* Edit and Delete buttons for each organizer */}
                 <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-2 rounded mr-2"
-                  onClick={() => toggleUpdate('update', organizer)}
+                  onClick={() => toggleForm('Update', organizer)}
                 >
                   Edit
                 </button>
@@ -144,15 +145,88 @@ export default function User() {
         {/* Button to toggle the form */}
         <button
           className="bg-landmark-dark hover:bg-landmark-dark text-white font-bold py-2 px-4 rounded"
-          onClick={() => toggleForm()}
+          onClick={() => toggleForm('Add')}
         >
           Add Organizer
         </button>
       </div>
 
       {/* Form to add a new organizer */}
-      {showForm && form === 'add' ? <OrganizerForm addOrganizer={addOrganizer} /> : <UpdateForm updateOrganizer={updateOrganizer} updateBody={toUpdate || ''} />}
+      {(showForm && updateFormId) && (label === 'Add' ? <Form updateOrAdd={addOrganizer} label={label}/> : <Form organizerBody={toUpdate} updateOrAdd={updateOrganizer} label={label}/>)}
     </div>
+  );
+}
+const Form: React.FC<{ organizerBody?: any, label: string, updateOrAdd: (body: any) => void }> = ({ organizerBody, label, updateOrAdd }) => {
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [whatsappId, setWhatsAppId] = useState('');
+
+  useEffect(() => {
+    setName(organizerBody?.name || '');
+    setPhoneNumber(organizerBody?.phoneNumber || '');
+    setEmail(organizerBody?.email || '');
+    setWhatsAppId(organizerBody?.whatsappId || '');
+  }, [organizerBody]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Basic validation
+    if (!name || !phoneNumber || !email) return;
+    // Create new organizer object
+    const newOrganizer = {
+      organizerId: organizerBody?.organizerId || '',
+      name,
+      phoneNumber,
+      email,
+      whatsappId
+    } as Organizer;
+    // Call addOrganizer function passed from parent component
+    updateOrAdd(newOrganizer);
+    // Reset form fields
+    setName("");
+    setPhoneNumber("");
+    setEmail("");
+    setWhatsAppId("");
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="border border-gray-400 p-2 rounded"
+      />
+      <input
+        type="text"
+        placeholder="Phone Number"
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+        className="border border-gray-400 p-2 rounded"
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="border border-gray-400 p-2 rounded"
+      />
+      <input
+        type="text"
+        placeholder="WhatsApp Id"
+        value={whatsappId}
+        onChange={(e) => setWhatsAppId(e.target.value)}
+        className="border border-gray-400 p-2 rounded"
+      />
+      <button
+        type="submit"
+        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      >
+        {label} Organizer
+      </button>
+    </form>
   );
 }
 
