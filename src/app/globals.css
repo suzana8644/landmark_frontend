@@ -5,59 +5,132 @@
 html,
 body,
 :root {
-  height: 100%;
+    height: 100%;
 }
 
 input {
-  outline: none;
+    outline: none;
 }
 
 /* scroll bar */
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
-  border-radius: 8px;
+    width: 8px;
+    border-radius: 8px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 8px;
+    background: #f1f1f1;
+    border-radius: 8px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 8px;
+    background: #888;
+    border-radius: 8px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+    background: #555;
 }
 
 /* circleAnimation.module.css */
 
 .circularAnimation {
-  animation: circularAnimation 7s infinite;
+    animation: circularAnimation 7s infinite;
 }
 
 @keyframes circularAnimation {
-  0% {
-    transform: translate(0, 40%);
-  }
-  50% {
-    transform: translate(50%, -20%);
-  }
-  100% {
-    transform: translate(0, 40%);
-  }
+    0% {
+        transform: translate(0, 40%);
+    }
+    50% {
+        transform: translate(50%, -20%);
+    }
+    100% {
+        transform: translate(0, 40%);
+    }
 }
 
 .thumbs .swiper-slide {
-  opacity: 0.25;
+    opacity: 0.25;
 }
 
 .thumbs .swiper-slide-thumb-active {
-  opacity: 1;
+    opacity: 1;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 14px;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 800px;
+}
+
+table thead tr {
+    background-color: #B9AF87;
+    color: #ffffff;
+    text-align: left;
+}
+
+table th,
+table td {
+    padding: 10px 15px;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #f6f6f6;
+}
+
+table tbody tr:last-of-type {
+    border-bottom: 2px solid #B9AF87;
+}
+
+table tbody tr.active-row {
+    font-weight: bold;
+    color: #B9AF87;
+}
+
+table td:first-child input {
+    width: 250px;
+}
+
+table td:nth-child(2) input {
+    width: 120px;
+}
+
+table .edit-cell-container button {
+    border-radius: 50px;
+    height: 26px;
+    width: 26px;
+    border: 1px solid #ccc;
+    color: #B9AF87;
+}
+
+table button[name="cancel"] {
+    color: red;
+}
+
+table button[name="done"] {
+    color: #B9AF87;
+}
+
+table input,
+select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+table .edit-cell {
+    display: flex;
+    gap: 5px;
 }
