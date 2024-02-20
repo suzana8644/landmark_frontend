@@ -5,28 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="939ce898-f851-48a8-9c95-790a074144e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/admin/dashboard/organizers/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/eventCategory/[eventCategoryId]/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchCategories.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchImages.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchOrganizers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchThemes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/api/updateOrganizers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/raw-data/nav-links.js" beforeDir="false" afterPath="$PROJECT_DIR$/raw-data/nav-links.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/components/sideNav.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/user/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/eventCategories/EventAccordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/eventCategories/EventAccordion.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/eventCategories/[categoryId]/loadingSkeleton.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/eventCategories/[categoryId]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/gallery/GalleryAccordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/gallery/GalleryAccordion.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/navbar/NavBarComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/navbar/NavBarComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/themes/[themeId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/themes/[themeId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/api/theme.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/gallery/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/gallery/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/api/fetchOrganizers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/api/fetchOrganizers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,8 +26,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="tsconfig.json" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -67,27 +54,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/dhirajphuyal/Sujana/landmark_decor/frontend/src/app/eventCategories/[categoryId]",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/dhirajphuyal/Sujana/landmark_decor/frontend/node_modules/prettier",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "/Users/dhirajphuyal/Sujana/landmark_decor/frontend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/dhirajphuyal/Sujana/landmark_decor/frontend/src/app/eventCategories/[categoryId]&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/dhirajphuyal/Sujana/landmark_decor/frontend/node_modules/prettier&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/dhirajphuyal/Sujana/landmark_decor/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app/eventCategories/[categoryId]" />
@@ -140,6 +127,8 @@
       <workItem from="1708099680618" duration="2215000" />
       <workItem from="1708141517556" duration="6930000" />
       <workItem from="1708261011908" duration="36447000" />
+      <workItem from="1708337728089" duration="1122000" />
+      <workItem from="1708343876347" duration="15631000" />
     </task>
     <servers />
   </component>
