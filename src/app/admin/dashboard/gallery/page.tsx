@@ -261,7 +261,7 @@ const Table = ({ fetchedData }: any) => {
         </tbody>
       </table>
       <button onClick={() => saveData()}>Save</button>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
     </>
   );
 };
