@@ -158,8 +158,8 @@ export default function User() {
       </div>
 
       {/* Form to add a new organizer */}
-      {showForm &&
-        updateFormId &&
+      {(showForm ||
+        updateFormId) &&
         (label === "Add" ? (
           <Form updateOrAdd={addOrganizer} label={label} />
         ) : (

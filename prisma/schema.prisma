@@ -22,7 +22,8 @@ model Image {
   imageId String @id @default(cuid()) @map("_id")
   url     String
   themeId String
-  theme   Theme  @relation(fields: [themeId], references: [themeId])
+  //esko migration baki
+  theme   Theme  @relation(fields: [themeId], references: [themeId], onDelete: Cascade)
 }
 
 model Organizer {

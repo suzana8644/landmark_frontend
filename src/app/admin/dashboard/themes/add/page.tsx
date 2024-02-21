@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, FilledInputClassKey } from "@mui/material";
 import { Theme } from "../../../../../../utils/interfaces";
+import { instance } from "../../../../../../config/axios";
 
 type Organizer = {
   organizerId: number;
@@ -17,7 +18,7 @@ type EventCategory = {
   eventCategoryId: number;
   name: String;
   description: String;
-  image: String;
+  image: String[];
   themes: Theme[];
 };
 
@@ -25,11 +26,11 @@ export default function AddDecoration() {
   const [loading, setLoading] = useState(false);
   const [organizers, setOrganizers] = useState<Organizer[]>([]);
   const [eventCategories, setEventCategories] = useState<EventCategory[]>([]);
+  const [images, setImages] = useState<FileList>();
   const [formData, setFormData] = useState({
     organizerId: "",
     name: "",
     description: "",
-    images: "",
     eventCategoryId: "",
     price: "",
   });
@@ -46,6 +47,11 @@ export default function AddDecoration() {
       [id]: value,
     }));
   };
+
+  const handleIMageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //@ts-ignore
+    setImages(e.target.files);
+  }
 
   useEffect(() => {
     const fetchEventCategories = async () => {
@@ -72,6 +78,34 @@ export default function AddDecoration() {
     fetchEventCategories();
   }, []);
 
+  //useEffect ya kei use garna baki for better state management
+  const saveImageUrlToDb = async (themeId: string, imageInfo: any) => {
+        await fetch('/api/fetchThemes?image=true', {
+          method: "POST",
+          body: JSON.stringify({
+            themeId,
+            data: imageInfo
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+  }
+  const uploadImages = async (images: FileList) => {
+    try {
+      const formData = new FormData();
+      for (let i = 0; i < images.length; i++) {
+        formData.append("file", images[i]);
+      }
+      const response = await instance.post('/api/upload', formData);
+      return response.data.fileInfo;
+
+    } catch (error) {
+      toast.error("Error uploading images");
+    }
+  }
+
   const handleSubmit = async () => {
     try {
       setLoading(true);
@@ -96,13 +130,16 @@ export default function AddDecoration() {
       ];
 
       const res = await Promise.all(promises);
+
       if (res) {
+        const theme = await res[0].json();
+        const uploadedImages = await uploadImages(images as FileList);
+        await saveImageUrlToDb(theme.themeId, uploadedImages);
         setLoading(false);
         setFormData({
           organizerId: "",
           name: "",
           description: "",
-          images: "",
           eventCategoryId: "",
           price: "",
         });
@@ -164,7 +201,7 @@ export default function AddDecoration() {
               onChange={handleChange}
             >
               <option value="">Select Organizer</option>
-              {organizers.map((organizer) => (
+              {organizers?.map((organizer) => (
                 <option
                   key={organizer.organizerId}
                   value={organizer.organizerId}
@@ -213,7 +250,8 @@ export default function AddDecoration() {
               id="images"
               type="file"
               placeholder="Enter Images (comma-separated)"
-              onChange={handleChange}
+              onChange={handleIMageChange}
+              multiple
             />
           </div>
         </div>
