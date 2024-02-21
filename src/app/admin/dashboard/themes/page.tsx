@@ -7,6 +7,7 @@ import {
   Image,
   Organizer,
 } from "../../../../../utils/interfaces";
+import { useRouter } from "next/navigation";
 
 type Theme = {
   themeId: number;
@@ -22,6 +23,7 @@ type Theme = {
 };
 
 export default function User() {
+  const router = useRouter();
   // State to manage themes data
 
   const [themes, setThemes] = useState<Theme[]>([]);
@@ -156,7 +158,7 @@ export default function User() {
         {/* Button to toggle the form */}
         <button
           className="bg-landmark-dark hover:bg-landmark-dark text-white font-bold py-2 px-4 rounded"
-          onClick={() => toggleForm("Add")}
+          onClick={() => router.push("/admin/dashboard/themes/add")}
         >
           Add Theme
         </button>
@@ -235,13 +237,6 @@ const Form: React.FC<{
         onChange={(e) => setPrice(e.target.value)}
         className="border border-gray-400 p-2 rounded resize"
       />
-      {/*<input*/}
-      {/*  type="text"*/}
-      {/*  placeholder="WhatsApp Id"*/}
-      {/*  value={whatsappId}*/}
-      {/*  onChange={(e) => setWhatsAppId(e.target.value)}*/}
-      {/*  className="border border-gray-400 p-2 rounded"*/}
-      {/*/>*/}
       <button
         type="submit"
         className="bg-landmark-dark hover:bg-landmark-dark text-white font-bold py-2 px-4 rounded"
@@ -304,13 +299,6 @@ const UpdateForm: React.FC<{
         onChange={(e) => setPrice(e.target.value)}
         className="border border-gray-400 p-2 rounded"
       />
-      {/*<input*/}
-      {/*  type="text"*/}
-      {/*  placeholder="WhatsApp Id"*/}
-      {/*  value={whatsappId}*/}
-      {/*  onChange={(e) => setWhatsAppId(e.target.value)}*/}
-      {/*  className="border border-gray-400 p-2 rounded"*/}
-      {/*/>*/}
       <button
         type="submit"
         className="bg-landmark-dark hover:bg-landmark-dark text-white font-bold py-2 px-4 rounded"
