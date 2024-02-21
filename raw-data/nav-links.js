@@ -8,7 +8,7 @@ export const navLinks = [
     name: "Events",
   },
   {
-    path: "/gallery",
+    path: "/eventCategories",
     name: "Gallery",
   },
   {
@@ -23,15 +23,11 @@ export const adminNavLinks = [
     name: "Dashboard",
   },
   {
-    path: "/admin/dashboard/event",
-    name: "Events",
-  },
-  {
-    path: "/admin/dashboard/gallery",
+    path: "/admin/dashboard/eventCategories",
     name: "Edit Event Categories",
   },
   {
-    path: "/admin/dashboard/decoration",
+    path: "/admin/dashboard/themes",
     name: "Edit Themes",
   },
   {
