@@ -284,20 +284,6 @@ const UpdateForm: React.FC<{
         className="border border-gray-400 p-2 rounded"
         style={{ width: "100%", height: "250px" }}
       />
-      {/*<input*/}
-      {/*  type="text"*/}
-      {/*  placeholder="Price"*/}
-      {/*  value={price}*/}
-      {/*  onChange={(e) => setPrice(e.target.value)}*/}
-      {/*  className="border border-gray-400 p-2 rounded"*/}
-      {/*/>*/}
-      {/*<input*/}
-      {/*  type="text"*/}
-      {/*  placeholder="WhatsApp Id"*/}
-      {/*  value={whatsappId}*/}
-      {/*  onChange={(e) => setWhatsAppId(e.target.value)}*/}
-      {/*  className="border border-gray-400 p-2 rounded"*/}
-      {/*/>*/}
       <button
         type="submit"
         className="bg-landmark-dark hover:bg-landmark-dark text-white font-bold py-2 px-4 rounded"
