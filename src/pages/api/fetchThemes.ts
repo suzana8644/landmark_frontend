@@ -1,43 +1,107 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
-import { withAccelerate } from '@prisma/extension-accelerate';
+import { withAccelerate } from "@prisma/extension-accelerate";
 
-const prisma = new PrismaClient().$extends(withAccelerate());
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  const prisma = new PrismaClient().$extends(withAccelerate());
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === "POST") {
     try {
-        // Check if the request includes a specific themeId
-        const themeId = req.query.themeId as string;
-        if (themeId) {
-            // Fetch the theme by themeId
-            const theme = await prisma.theme.findUnique({
-                where: {
-                    themeId: themeId
-                }
-            });
-            if (!theme) {
-                return res.status(404).json({ message: "Theme not found" });
-            }
-            return res.status(200).json(theme);
-        } else {
-            // Check if the request includes a specific eventCategoryId
-            const eventCategoryId = req.query.eventCategoryId as string;
-            if (eventCategoryId) {
-                // Fetch themes by eventCategoryId
-                const themes = await prisma.theme.findMany({
-                    where: {
-                        eventCategoryId: eventCategoryId
-                    }
-                });
-                return res.status(200).json(themes);
-            } else {
-                // Fetch all themes
-                const themes = await prisma.theme.findMany();
-                return res.status(200).json(themes);
-            }
-        }
+      const theme = req.body;
+      console.log(req.body);
+
+      // Create a new organizer
+      const newTheme = await prisma.theme.create({
+        data: theme,
+      });
+      console.log("new", newTheme);
+
+      // Return the created organizer
+      return res.status(201).json(newTheme);
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Something went wrong!" });
+      console.log(error);
+      return res.status(500).json({ message: "Failed to add Theme!" });
     }
-};
+  }
+  if (req.method === "PUT") {
+    try {
+      const { themeId, ...rem } = req.body;
+
+      // Fetch the existing organizer
+      const existingTheme = await prisma.theme.findUnique({
+        where: {
+          themeId: themeId,
+        },
+      });
+
+      // Check if the organizer exists
+      if (!existingTheme) {
+        return res.status(404).json({ message: "Theme not found" });
+      }
+
+      // Extract the updated data from the request body
+
+      // Update the organizer
+      const updatedTheme = await prisma.theme.update({
+        where: {
+          themeId: themeId,
+        },
+        data: rem,
+      });
+
+      // Return the updated organizer
+      return res.status(200).json(updatedTheme);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Something went wrong!" });
+    }
+  }
+  if (req.method === "DELETE") {
+    try {
+      const themeId = req.query.id as string;
+      const theme = await prisma.theme.delete({
+        where: {
+          themeId: themeId,
+        },
+      });
+      return res.status(200).json(theme);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Something went wrong!" });
+    }
+  }
+  try {
+    // Extract the organizerId from the request query
+    const themeId = req.query.themeId as string;
+
+    // Check if organizerId is provided
+    if (themeId) {
+      // Fetch the organizer based on the provided organizerId
+      const theme = await prisma.theme.findUnique({
+        where: {
+          themeId: themeId,
+        },
+      });
+
+      // Check if the organizer is found
+      if (!theme) {
+        return res.status(404).json({ message: "Theme not found" });
+      }
+
+      // Return the found organizer
+      return res.status(200).json(theme);
+    } else {
+      // Fetch all organizers
+      const themes = await prisma.theme.findMany();
+
+      // Return the found organizers
+      return res.status(200).json(themes);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Something went wrong!" });
+  }
+}
