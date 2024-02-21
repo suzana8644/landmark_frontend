@@ -27,7 +27,7 @@ export type Organizer = {
 
 // Theme
 export type Theme = {
-  themeId: string;
+  themeId: number;
   name: string;
   image: Image[];
   description: string;
