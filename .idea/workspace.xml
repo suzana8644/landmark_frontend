@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="939ce898-f851-48a8-9c95-790a074144e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/api/updateOrganizers.ts" afterDir="false" />
+    <list default="true" id="939ce898-f851-48a8-9c95-790a074144e8" name="Changes" comment="refactor: code clean up and post message to database">
+      <change afterPath="$PROJECT_DIR$/src/app/admin/dashboard/eventCategories/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/admin/dashboard/themes/add/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/gallery/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/gallery/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/api/fetchOrganizers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/api/fetchOrganizers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/raw-data/dummyEvents.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/decoration/add/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/decoration/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/event/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/gallery/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/organizers/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/organizers/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/eventCategories/EventAccordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/eventCategories/EventAccordion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/eventCategory/[eventCategoryId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/eventCategory/[eventCategoryId]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,17 +66,20 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/dhirajphuyal/Sujana/landmark_decor/frontend/src/app/eventCategories/[categoryId]&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/dhirajphuyal/Sujana/landmark_decor/frontend/node_modules/prettier&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/dhirajphuyal/Desktop/landmark_frontend/node_modules/prettier&quot;,
     &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/dhirajphuyal/Sujana/landmark_decor/frontend/node_modules/typescript/lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/dhirajphuyal/Desktop/landmark_frontend/node_modules/typescript/lib&quot;,
+    &quot;ts.rename.search.for.js.occurrences&quot;: &quot;false&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -129,7 +137,90 @@
       <workItem from="1708261011908" duration="36447000" />
       <workItem from="1708337728089" duration="1122000" />
       <workItem from="1708343876347" duration="15631000" />
+      <workItem from="1708447315569" duration="8219000" />
+      <workItem from="1708483249302" duration="4237000" />
     </task>
+    <task id="LOCAL-00001" summary="add: model for message">
+      <option name="closed" value="true" />
+      <created>1708489241587</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489241587</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add: api for fetching and uploading messages">
+      <option name="closed" value="true" />
+      <created>1708489265750</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489265750</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refractor: add interfaces for all models">
+      <option name="closed" value="true" />
+      <created>1708489321471</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489321471</updated>
+    </task>
+    <task id="LOCAL-00004" summary="cleanup: change navlinks">
+      <option name="closed" value="true" />
+      <created>1708489344377</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489344377</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add: post and delete requests">
+      <option name="closed" value="true" />
+      <created>1708489482846</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489482846</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add: post and delete requests">
+      <option name="closed" value="true" />
+      <created>1708489493772</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489493772</updated>
+    </task>
+    <task id="LOCAL-00007" summary="refractor: change table width to 100%">
+      <option name="closed" value="true" />
+      <created>1708489532048</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489532048</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: add themes table to admin">
+      <option name="closed" value="true" />
+      <created>1708489629868</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489629868</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: show messages">
+      <option name="closed" value="true" />
+      <created>1708489645512</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489645512</updated>
+    </task>
+    <task id="LOCAL-00010" summary="refactor: code clean up and post message to database">
+      <option name="closed" value="true" />
+      <created>1708489681546</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1708489681546</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,5 +228,17 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add: model for message" />
+    <MESSAGE value="add: api for fetching and uploading messages" />
+    <MESSAGE value="refractor: add interfaces for all models" />
+    <MESSAGE value="cleanup: change navlinks" />
+    <MESSAGE value="add: post and delete requests" />
+    <MESSAGE value="refractor: change table width to 100%" />
+    <MESSAGE value="feat: add themes table to admin" />
+    <MESSAGE value="feat: show messages" />
+    <MESSAGE value="refactor: code clean up and post message to database" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: code clean up and post message to database" />
   </component>
 </project>
