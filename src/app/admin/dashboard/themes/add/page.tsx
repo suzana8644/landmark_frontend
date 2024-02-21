@@ -1,26 +1,39 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { instance } from "../../../../../../config/axios";
 import { toast } from "react-toastify";
 import { CircularProgress } from "@mui/material";
+import { Theme } from "../../../../../../utils/interfaces";
+
+type Organizer = {
+  organizerId: number;
+  name: string;
+  phoneNumber: string;
+  email: string;
+  whatsappId: string;
+};
+
+type EventCategory = {
+  eventCategoryId: number;
+  name: String;
+  description: String;
+  image: String;
+  themes: Theme[];
+};
 
 export default function AddDecoration() {
   const [loading, setLoading] = useState(false);
-  const [decorators, setDecorators] = useState<{ name: string; id: string }[]>(
-    [],
-  );
+  const [organizers, setOrganizers] = useState<Organizer[]>([]);
+  const [eventCategories, setEventCategories] = useState<EventCategory[]>([]);
   const [formData, setFormData] = useState({
-    decoratorId: "",
-    title: "",
+    organizerId: "",
+    name: "",
     description: "",
-    themes: "",
     images: "",
-    categories: "Category 1",
-    startDate: "",
-    endDate: "",
+    eventCategoryId: "",
     price: "",
   });
+  const [uploadTheme, setUploadTheme] = useState<Theme>();
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -35,228 +48,206 @@ export default function AddDecoration() {
   };
 
   useEffect(() => {
-    // Simulated API call to fetch decorators
-    // Replace this with your actual API call to fetch decorators
-    const fetchDecorators = async () => {
-      // Simulated data, replace with actual fetching logic
-      const decorators = await instance.get("/api/decorators");
-      const fetchedDecorators = decorators.data.map((d: any) => ({
-        name: d.userId.username,
-        id: d.userId._id,
-      }));
-      setDecorators(fetchedDecorators);
+    const fetchEventCategories = async () => {
+      try {
+        const response = await fetch("/api/fetchCategories");
+        const eventCategories = await response.json();
+        console.log(eventCategories);
+        setEventCategories(eventCategories);
+      } catch (error) {
+        toast.error("Error fetching event categories");
+      }
     };
-
-    fetchDecorators();
+    const fetchOrganizer = async () => {
+      try {
+        const response = await fetch("/api/fetchOrganizers");
+        const organizers = await response.json();
+        console.log(organizers);
+        setOrganizers(organizers);
+      } catch (error) {
+        toast.error("Error fetching organizers");
+      }
+    };
+    fetchOrganizer();
+    fetchEventCategories();
   }, []);
 
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      const res = await instance.post("/decorations", {
-        title: formData.title,
+      console.log("FormData", formData);
+      const body = {
+        organizerId: formData.organizerId,
+        eventCategoryId: formData.eventCategoryId,
+        name: formData.name,
         description: formData.description,
-        themes: formData.themes.split(","),
-        images: formData.images.split(","),
-        categories: formData.categories,
-        availability: {
-          from: new Date(formData.startDate),
-          to: new Date(formData.endDate),
-        },
-        price: formData.price,
-      });
+        price: parseFloat(formData.price),
+        additionalDetails: "",
+      };
+      // Make multiple API calls in parallel
+      const promises = [
+        await fetch(`/api/fetchThemes`, {
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }),
+      ];
 
+      const res = await Promise.all(promises);
       if (res) {
         setLoading(false);
         setFormData({
-          decoratorId: "",
-          title: "",
+          organizerId: "",
+          name: "",
           description: "",
-          themes: "",
           images: "",
-          categories: "Category 1",
-          startDate: "",
-          endDate: "",
+          eventCategoryId: "",
           price: "",
         });
       }
-
-      toast.success("themes created!");
+      toast.success("Theme created!");
     } catch (error) {
-      toast.error("error creating themes.");
+      toast.error("Error creating Theme.");
     }
   };
 
   return (
-    <form className="w-full max-w-lg">
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="decoratorId"
-          >
-            Decorator ID
-          </label>
-          <select
-            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="decoratorId"
-            onChange={handleChange}
-          >
-            <option value="">Select Decorator</option>
-            {decorators.map((decorator) => (
-              <option key={decorator.id} value={decorator.id}>
-                {decorator.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="title"
-          >
-            Title
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="title"
-            type="text"
-            placeholder="Enter Title"
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="description"
-          >
-            Description
-          </label>
-          <textarea
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="description"
-            placeholder="Enter Description"
-            onChange={handleChange}
-          ></textarea>
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="themes"
-          >
-            Themes
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="themes"
-            type="text"
-            placeholder="Enter Themes (comma-separated)"
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="images"
-          >
-            Images
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="images"
-            type="text"
-            placeholder="Enter Images (comma-separated)"
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="categories"
-          >
-            Categories
-          </label>
-          <select
-            className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="categories"
-            onChange={handleChange}
-          >
-            <option>Category 1</option>
-            <option>Category 2</option>
-            <option>Category 3</option>
-          </select>
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="startDate"
-          >
-            Start Date
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="startDate"
-            type="date"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="w-full md:w-1/2 px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="endDate"
-          >
-            End Date
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="endDate"
-            type="date"
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="price"
-          >
-            Price
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="price"
-            type="number"
-            placeholder="Enter Price"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="w-full md:w-1/4 px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="price"
-          >
-            <button
-              onClick={handleSubmit}
-              className="rounded-full py-3 px-6 md:py-4 md:px-8 bg-landmark-light text-black text-lg md:text-xl hover:bg-yellow-400 focus:outline-none"
+    <>
+      <h1 className="text-2xl font-semibold text-black">Add Theme:</h1>
+      <form className="w-full max-w-lg mt-4">
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full px-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="name"
             >
-              {loading ? <CircularProgress size={25} /> : "Submit"}
-            </button>
-          </label>
+              Title
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="name"
+              type="text"
+              placeholder="Enter Title"
+              onChange={handleChange}
+            />
+          </div>
         </div>
-      </div>
-    </form>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full px-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="description"
+            >
+              Description
+            </label>
+            <textarea
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="description"
+              placeholder="Enter Description"
+              onChange={handleChange}
+            ></textarea>
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full px-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="organizerId"
+            >
+              Organizer
+            </label>
+            <select
+              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="organizerId"
+              onChange={handleChange}
+            >
+              <option value="">Select Organizer</option>
+              {organizers.map((organizer) => (
+                <option
+                  key={organizer.organizerId}
+                  value={organizer.organizerId}
+                >
+                  {organizer.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full px-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="category"
+            >
+              Category
+            </label>
+            <select
+              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="eventCategoryId"
+              onChange={handleChange}
+            >
+              <option value="">Select Event Category</option>
+              {eventCategories.map((eventCategory) => (
+                <option
+                  key={eventCategory.eventCategoryId}
+                  value={eventCategory.eventCategoryId}
+                >
+                  {eventCategory.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full px-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="images"
+            >
+              Images
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="images"
+              type="file"
+              placeholder="Enter Images (comma-separated)"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="price"
+            >
+              Price
+            </label>
+            <input
+              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="price"
+              type="number"
+              placeholder="Enter Price"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="w-full md:w-1/4 px-3">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="price"
+            >
+              <button
+                onClick={handleSubmit}
+                className="rounded-full py-3 px-6 md:py-4 md:px-8 bg-landmark-light text-black text-lg md:text-xl hover:bg-yellow-400 focus:outline-none"
+              >
+                {loading ? <CircularProgress size={25} /> : "Submit"}
+              </button>
+            </label>
+          </div>
+        </div>
+      </form>
+    </>
   );
 }
