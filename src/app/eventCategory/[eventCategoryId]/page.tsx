@@ -53,7 +53,7 @@ const IndividualEventPage = () => {
           `/api/fetchCategories?eventCategoryId=${params?.eventCategoryId}`,
         );
         if (!response.ok) {
-          throw new Error("Failed to fetch event categories");
+          throw new Error("Failed to fetch events categories");
         }
         const data = await response.json();
         setEventCategory(data);
