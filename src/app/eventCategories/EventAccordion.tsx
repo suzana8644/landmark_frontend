@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-import { superEvents } from "../../../raw-data/dummyEvents";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Add, Remove } from "@mui/icons-material";
@@ -35,7 +33,7 @@ const EventAccordion = () => {
       try {
         const response = await fetch(`/api/fetchCategories`);
         if (!response.ok) {
-          throw new Error("Failed to fetch event categories");
+          throw new Error("Failed to fetch events categories");
         }
         const data = await response.json();
         setEventCategories(data);
@@ -50,7 +48,7 @@ const EventAccordion = () => {
   const router = useRouter();
 
   const [activeAccordion, setActiveAccordion] = useState(
-    Array(superEvents.length).fill(false),
+    Array(eventCategories?.length).fill(false),
   );
 
   const toggleAccordion = (index: number) => {
