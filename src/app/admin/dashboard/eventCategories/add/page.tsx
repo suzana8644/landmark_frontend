@@ -68,19 +68,17 @@ export default function AddDecoration() {
       };
 
       // Make multiple API calls in parallel
-      const promises = [
-        await fetch(`/api/fetchCategories`, {
-          method: "POST",
-          body: JSON.stringify(body),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }),
-      ];
 
-      const res = await Promise.all(promises);
+      const res = await fetch(`/api/fetchCategories`, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
       if (res) {
-        const eventCategory = await res[0].json();
+        const eventCategory = await res.json();
         const uploadedImages = await uploadImages(images as FileList);
         await saveImageUrlToDb(eventCategory.eventCategoryId, uploadedImages);
         setLoading(false);

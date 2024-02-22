@@ -118,20 +118,19 @@ export default function AddDecoration() {
         additionalDetails: "",
       };
       // Make multiple API calls in parallel
-      const promises = [
-        await fetch(`/api/fetchThemes`, {
+      
+        const res = await fetch(`/api/fetchThemes`, {
           method: "POST",
           body: JSON.stringify(body),
           headers: {
             "Content-Type": "application/json",
           },
-        }),
-      ];
+        })
 
-      const res = await Promise.all(promises);
-      console.log(res[0].json());
-      if (res) {
-        const theme = await res[0].json();
+      // const res = await Promise.all(promises);
+      if (res.status === 201) {
+        const theme = await res.json();
+        console.log('done>>>>>>>', theme);
         const uploadedImages = await uploadImages(images as FileList);
         await saveImageUrlToDb(theme.themeId, uploadedImages);
         setLoading(false);
