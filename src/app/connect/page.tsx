@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { instance } from "../../../config/axios";
 
 const MessageForm = () => {
   const [formData, setFormData] = useState({
@@ -24,16 +25,27 @@ const MessageForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     try {
-      const response = await fetch("/api/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        // Optionally handle success, e.g., clear form fields or show a success message
+      // Make multiple API calls in parallel
+      const promises = [
+        await instance.post(`/api/connect`, {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phoneNumber: formData.phoneNumber,
+        }),
+        await fetch("/api/messages", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }),
+      ];
+
+      const response = await Promise.all(promises);
+      if (response) {
         setFormData({
           firstName: "",
           lastName: "",

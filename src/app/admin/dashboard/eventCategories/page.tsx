@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Theme } from "../../../../../utils/interfaces";
+import { useRouter } from "next/navigation";
 
 type EventCategory = {
   eventCategoryId: number;
@@ -13,6 +14,7 @@ type EventCategory = {
 };
 
 export default function User() {
+  const router = useRouter();
   // State to manage themes data
 
   const [eventCategories, setEventCategories] = useState<EventCategory[]>([]);
@@ -147,7 +149,7 @@ export default function User() {
         {/* Button to toggle the form */}
         <button
           className="bg-landmark-dark hover:bg-landmark-dark text-white font-bold py-2 px-4 rounded"
-          onClick={() => toggleForm("Add")}
+          onClick={() => router.push("/admin/dashboard/eventCategories/add")}
         >
           Add Category
         </button>

@@ -5,12 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="939ce898-f851-48a8-9c95-790a074144e8" name="Changes" comment="add: ignore .idea folder">
+      <change afterPath="$PROJECT_DIR$/src/app/admin/dashboard/eventCategories/add/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchEventImages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/api/fetchThemeImages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/eventCategories/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/eventCategories/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/themes/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/themes/add/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/dashboard/themes/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/dashboard/themes/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/connect/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/connect/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/eventCategories/EventAccordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/eventCategories/EventAccordion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/eventCategory/[eventCategoryId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/eventCategory/[eventCategoryId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/themes/[themeId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/themes/[themeId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/api/fetchCategories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/api/fetchCategories.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/api/fetchImages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/api/fetchThemes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/api/fetchThemes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/interfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +47,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "dhirajphuyal"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;dhirajphuyal&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -64,32 +75,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/dhirajphuyal/Sujana/landmark_decor/frontend/src/app/eventCategories/[categoryId]&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/dhirajphuyal/Desktop/landmark_frontend/node_modules/prettier&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/dhirajphuyal/Desktop/landmark_frontend/node_modules/typescript/lib&quot;,
-    &quot;ts.rename.search.for.js.occurrences&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "code.cleanup.on.save": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/dhirajphuyal/Desktop/new/landmark_frontend/src/app/admin/dashboard/eventCategories",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/dhirajphuyal/Desktop/new/landmark_frontend/node_modules/prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "/Users/dhirajphuyal/Desktop/new/landmark_frontend/node_modules/typescript/lib",
+    "ts.rename.search.for.js.occurrences": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/admin/dashboard/eventCategories" />
       <recent name="$PROJECT_DIR$/src/app/eventCategories/[categoryId]" />
       <recent name="$PROJECT_DIR$/src/app/users" />
     </key>
@@ -144,6 +156,7 @@
       <workItem from="1708343876347" duration="15631000" />
       <workItem from="1708447315569" duration="8219000" />
       <workItem from="1708483249302" duration="4237000" />
+      <workItem from="1708539726039" duration="11429000" />
     </task>
     <task id="LOCAL-00001" summary="add: model for message">
       <option name="closed" value="true" />

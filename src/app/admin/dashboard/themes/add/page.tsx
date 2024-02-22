@@ -51,7 +51,7 @@ export default function AddDecoration() {
   const handleIMageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //@ts-ignore
     setImages(e.target.files);
-  }
+  };
 
   useEffect(() => {
     const fetchEventCategories = async () => {
@@ -80,33 +80,32 @@ export default function AddDecoration() {
 
   //useEffect ya kei use garna baki for better state management
   const saveImageUrlToDb = async (themeId: string, imageInfo: any) => {
-        await fetch('/api/fetchThemes?image=true', {
-          method: "POST",
-          body: JSON.stringify({
-            themeId,
-            data: imageInfo
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-  }
+    await fetch("/api/fetchThemes?image=true", {
+      method: "POST",
+      body: JSON.stringify({
+        themeId,
+        data: imageInfo,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
   const uploadImages = async (images: FileList) => {
     try {
       const formData = new FormData();
       for (let i = 0; i < images.length; i++) {
         formData.append("file", images[i]);
       }
-      const response = await instance.post('/api/upload', formData);
+      const response = await instance.post("/api/upload", formData);
       return response.data.fileInfo;
-
     } catch (error) {
       toast.error("Error uploading images");
     }
-  }
+  };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     try {
       setLoading(true);
       console.log("FormData", formData);
@@ -130,7 +129,7 @@ export default function AddDecoration() {
       ];
 
       const res = await Promise.all(promises);
-
+      console.log(res[0].json());
       if (res) {
         const theme = await res[0].json();
         const uploadedImages = await uploadImages(images as FileList);

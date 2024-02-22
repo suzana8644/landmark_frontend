@@ -4,30 +4,13 @@ import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Add, Remove } from "@mui/icons-material";
 import Image from "next/image";
-
-interface EventCategory {
-  eventCategoryId: string;
-  name: string;
-  description: string;
-  image: string;
-  themes: Theme[];
-}
-
-interface Theme {
-  themeId: string;
-  name: string;
-  image: string;
-  description: string;
-  price: number;
-  additionalDetails: string;
-  organizerId: string;
-  eventCategoryId: string;
-}
+import { Theme, EventCategory, EventImage } from "../../../utils/interfaces";
 
 const EventAccordion = () => {
   const [eventCategories, setEventCategories] = useState<
     EventCategory[] | null
   >(null);
+  const [images, setImages] = useState<EventImage[]>();
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -41,7 +24,20 @@ const EventAccordion = () => {
         console.error("Error fetching organizer data:", error);
       }
     };
+    const fetchEventImages = async () => {
+      try {
+        const response = await fetch(`/api/fetchEventImages`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch events categories");
+        }
+        const data = await response.json();
+        setImages(data);
+      } catch (error) {
+        console.error("Error fetching organizer data:", error);
+      }
+    };
     fetchCategories();
+    fetchEventImages();
   }, []);
   console.log(eventCategories);
 
@@ -57,6 +53,7 @@ const EventAccordion = () => {
     setActiveAccordion(newActiveAccordion);
   };
 
+  // @ts-ignore
   return (
     <div>
       {eventCategories?.map((eventCategory, index) => (
@@ -85,7 +82,7 @@ const EventAccordion = () => {
             >
               <div className="flex w-1/2 w-[100%] md:w-[30%] justify-center">
                 <Image
-                  src={eventCategory.image}
+                  src={images ? images[index].url : "" || ""}
                   height={200}
                   width={200}
                   alt={eventCategory.name}

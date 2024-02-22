@@ -1,23 +1,28 @@
-// EventCategory
 export type EventCategory = {
-  eventCategoryId: string;
+  eventCategoryId: number;
   name: string;
   description: string;
-  image: string;
+  image: EventImage[];
+  imageId?: string;
   themes: Theme[];
 };
 
-// Image
-export type Image = {
-  imageId: string;
+export type ThemeImage = {
+  imageId: number;
   url: string;
   themeId: string;
   theme: Theme;
 };
 
-// Organizer
+export type EventImage = {
+  imageId: number;
+  url: string;
+  eventCategoryId: string;
+  event: EventCategory;
+};
+
 export type Organizer = {
-  organizerId: string;
+  organizerId: number;
   email: string;
   name: string;
   phoneNumber: string;
@@ -25,35 +30,42 @@ export type Organizer = {
   themes: Theme[];
 };
 
-// Theme
 export type Theme = {
   themeId: number;
   name: string;
-  image: Image[];
+  image: ThemeImage[];
+  imageId?: string;
   description: string;
   price: number;
   additionalDetails: string;
   organizer: Organizer;
   organizerId: string;
-  eventCategory: EventCategory;
   eventCategoryId: string;
+  eventCategory: EventCategory;
 };
 
-// Customer
 export type Customer = {
-  customerId: string;
+  customerId: number;
   name: string;
   phoneNumber: string;
   bookings: Booking[];
 };
 
-// Booking
 export type Booking = {
-  bookingId: string;
+  bookingId: number;
   customerId: string;
-  themeId?: string | null; // Optional reference to Theme
-  date: Date; // Use the proper Date type
+  themeId?: string;
+  date: Date;
   status: string;
   notes: string;
   customer: Customer;
+};
+
+export type Message = {
+  messageId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  message: string;
 };

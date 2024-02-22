@@ -7,7 +7,25 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const prisma = new PrismaClient().$extends(withAccelerate());
-
+  if (req.method === "POST" && req.query.image === "true") {
+    try {
+      console.log("body>>>>>", req.body);
+      const { eventCategoryId, data } = req.body;
+      const images = await prisma.eventImage.createMany({
+        data: data.map((image: { url: string; imageId: string }) => {
+          return {
+            eventCategoryId: eventCategoryId,
+            url: image.url,
+            imageId: image.imageId,
+          };
+        }),
+      });
+      return res.status(200).json(images);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Something went wrong!" });
+    }
+  }
   if (req.method === "POST") {
     try {
       const eventCategory = req.body;
@@ -19,7 +37,7 @@ export default async function handler(
       });
       console.log("new", newEventCategory);
 
-      // Return the created organizer
+      // Return the created category
       return res.status(201).json(newEventCategory);
     } catch (error) {
       console.log(error);

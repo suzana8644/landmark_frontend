@@ -8,38 +8,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useParams } from "next/navigation";
-
-interface Theme {
-  themeId: string;
-  name: string;
-  image: string;
-  description: string;
-  price: number;
-  additionalDetails: string;
-  organizerId: string;
-  eventCategoryId: string;
-}
-
-interface Image {
-  imageId: string;
-  url: string;
-  themeId: string;
-  theme: Theme;
-}
-
-interface Organizer {
-  organizerId: string;
-  email: string;
-  name: string;
-  phoneNumber: string;
-  whatsappId: string;
-  themes: Theme[];
-}
+import { Theme, ThemeImage, Organizer } from "../../../../utils/interfaces";
 
 const ThemePage = () => {
   const params = useParams();
   const themeId = params?.themeId;
-  const [images, setImages] = useState<Image[]>([]);
+  const [images, setImages] = useState<ThemeImage[]>([]);
   const [orders, setOrders] = useState([]);
   const [theme, setTheme] = useState<Theme | null>(null);
   const [organizer, setOrganizer] = useState<Organizer | null>(null);
@@ -47,9 +21,12 @@ const ThemePage = () => {
   useEffect(() => {
     const getTheme = async () => {
       try {
-        const response = await fetch(`/api/fetchThemes?themeId=${themeId}`, {
-          cache: "no-cache",
-        });
+        const response = await fetch(
+          `/api/fetchThemes?themeId=${params?.themeId}`,
+          {
+            cache: "no-cache",
+          },
+        );
         const data = await response.json();
         setTheme(data);
       } catch (error) {
@@ -86,7 +63,9 @@ const ThemePage = () => {
     };
     const fetchImages = async () => {
       try {
-        const response = await fetch(`/api/fetchImages?themeId=${themeId}`);
+        const response = await fetch(
+          `/api/fetchThemeImages?themeId=${themeId}`,
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch images");
         }
@@ -105,6 +84,7 @@ const ThemePage = () => {
   useEffect(() => {
     const fetchOrganizer = async () => {
       try {
+        console.log("Organizer ID", theme?.organizerId);
         const response = await fetch(
           `/api/fetchOrganizers?organizerId=${theme?.organizerId}`,
         );
@@ -118,7 +98,7 @@ const ThemePage = () => {
       }
     };
     fetchOrganizer();
-  }, [theme?.organizerId]);
+  }, [theme]);
   console.log(images);
 
   const handleWhatsapp = () => {
@@ -128,8 +108,8 @@ const ThemePage = () => {
   const handlePayment = async (payment_method: string) => {
     const url = `${process.env.NEXT_PUBLIC_API_KEY}/orders/create`;
     const data = {
-      amount: 100,
-      products: [{ product: "test", amount: 100, quantity: 1 }],
+      amount: `${theme?.price}`,
+      products: [{ product: "test", amount: `${theme?.price}`, quantity: 1 }],
       payment_method,
     };
     try {
@@ -177,15 +157,6 @@ const ThemePage = () => {
   };
 
   useEffect(() => {}, []);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
   return (
     <div className="flex flex-col h-full py-6">
       <div>
@@ -233,7 +204,7 @@ const ThemePage = () => {
             className={"bg-landmark-dark text-white rounded-lg py-2 px-4"}
             onClick={() => handlePayment("esewa")}
           >
-            Pay and book the event
+            Pay to connect with the organizer
           </button>
           <div className={"flex flex-row-reverse"}>
             <Image

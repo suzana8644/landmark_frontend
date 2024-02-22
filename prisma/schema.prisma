@@ -11,19 +11,28 @@ datasource db {
 }
 
 model EventCategory {
-  eventCategoryId String  @id @default(cuid()) @map("_id")
+  eventCategoryId String       @id @default(cuid()) @map("_id")
   name            String
   description     String
-  image           String
+  image           EventImage[]
+  imageId         String?
   themes          Theme[]
 }
 
-model Image {
+model ThemeImage {
   imageId String @id @default(cuid()) @map("_id")
   url     String
   themeId String
-  //esko migration baki
+  // esko migration baki
   theme   Theme  @relation(fields: [themeId], references: [themeId], onDelete: Cascade)
+}
+
+model EventImage {
+  imageId         String        @id @default(cuid()) @map("_id")
+  url             String
+  eventCategoryId String
+  // esko migration baki
+  event           EventCategory @relation(fields: [eventCategoryId], references: [eventCategoryId], onDelete: Cascade)
 }
 
 model Organizer {
@@ -38,14 +47,15 @@ model Organizer {
 model Theme {
   themeId           String        @id @default(cuid()) @map("_id")
   name              String
-  image             Image[]
+  image             ThemeImage[]
+  imageId           String?
   description       String
   price             Float
   additionalDetails String
   organizer         Organizer     @relation(fields: [organizerId], references: [organizerId])
   organizerId       String // references to Organizer
   eventCategoryId   String // references to EventCategory
-  eventCategory     EventCategory @relation(fields: [eventCategoryId], references: [eventCategoryId])
+  eventCategory     EventCategory @relation(fields: [eventCategoryId], references: [eventCategoryId], onDelete: Cascade)
 }
 
 // Model for a customer with a unique id and a name

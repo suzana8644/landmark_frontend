@@ -3,37 +3,12 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
-
-interface EventCategory {
-  eventCategoryId: string;
-  name: string;
-  description: string;
-  image: string;
-  themes: Theme[];
-}
-
-interface Theme {
-  themeId: string;
-  name: string;
-  image: string;
-  description: string;
-  price: number;
-  additionalDetails: string;
-  organizerId: string;
-  eventCategoryId: string;
-}
-
-interface Image {
-  imageId: string;
-  url: string;
-  themeId: string;
-  theme: Theme;
-}
-
-interface ThemeImages {
-  themeId: string;
-  images: Image[];
-}
+import {
+  EventCategory,
+  Theme,
+  ThemeImage,
+  EventImage,
+} from "../../../../utils/interfaces";
 
 const IndividualEventPage = () => {
   const [imageLoaded, setImageLoaded] = useState(false); // State to track if the image is loaded
@@ -41,12 +16,27 @@ const IndividualEventPage = () => {
   const [eventCategory, setEventCategory] = useState<EventCategory | null>(
     null,
   );
+  const [eventImages, setEventImages] = useState<EventImage>();
   const [themes, setThemes] = useState<Theme[] | null>(null);
-  const [images, setImages] = useState<ThemeImages[]>([]);
+  const [images, setImages] = useState<ThemeImage[]>([]);
   const router = useRouter();
   const params = useParams();
 
   useEffect(() => {
+    const fetchEventCategoryImages = async () => {
+      try {
+        const response = await fetch(
+          `/api/fetchEventImages?eventCategoryId=${params?.eventCategoryId}`,
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch events categories");
+        }
+        const data = await response.json();
+        setEventImages(data);
+      } catch (error) {
+        console.error("Error fetching organizer data:", error);
+      }
+    };
     const fetchCategories = async () => {
       try {
         const response = await fetch(
@@ -63,7 +53,7 @@ const IndividualEventPage = () => {
     };
     const fetchThemesAndImages = async () => {
       try {
-        const allImages = [];
+        const allImages: ThemeImage[] = [];
         const url = `/api/fetchThemes?eventCategoryId=${params?.eventCategoryId}`;
         const response = await fetch(url, {
           cache: "no-cache",
@@ -74,7 +64,7 @@ const IndividualEventPage = () => {
         // Iterate through fetched themes and fetch images for each theme
         for (const theme of data) {
           const imageResponse = await fetch(
-            `/api/fetchImages?themeId=${theme.themeId}`,
+            `/api/fetchThemeImages?themeId=${theme.themeId}`,
             {
               cache: "no-cache",
             },
@@ -85,7 +75,9 @@ const IndividualEventPage = () => {
             );
           }
           const images = await imageResponse.json();
-          allImages.push({ themeId: theme.themeId, images });
+          for (const image of images) {
+            allImages.push(image);
+          }
           setImages(allImages);
           setImageLoaded(true);
         }
@@ -110,7 +102,7 @@ const IndividualEventPage = () => {
             <div className="placeholder">Loading...</div> // Show a placeholder until the image is loaded
           )}
           <Image
-            src={images[0]?.images[0].url}
+            src={eventImages ? eventImages.url : "" || ""}
             height={300}
             width={400}
             alt={`Image for Event Category`}
@@ -132,9 +124,9 @@ const IndividualEventPage = () => {
               }}
               onClick={() => router.push(`/themes/${theme.themeId}`)}
             >
-              {images[index]?.images[0] && (
+              {images[index]?.url && (
                 <Image
-                  src={images[index]?.images[0].url}
+                  src={images[index]?.url}
                   height={200}
                   width={200}
                   alt={`Image for Theme ${theme.themeId}`}
