@@ -30,7 +30,7 @@ export default async function handler(
   if (req.method === "POST") {
     try {
       const theme = req.body;
-      console.log(req.body);
+      console.log("Req Bod in post theme:", req.body);
 
       // Create a new organizer
       const newTheme = await prisma.theme.create({
@@ -95,7 +95,17 @@ export default async function handler(
   try {
     // Extract the organizerId from the request query
     const themeId = req.query.themeId as string;
+    const eventCategoryId = req.query.eventCategoryId as string;
     console.log("Theme Id:", themeId);
+
+    if (eventCategoryId) {
+      const themes = await prisma.theme.findMany({
+        where: {
+          eventCategoryId: eventCategoryId,
+        },
+      });
+      return res.status(200).json(themes);
+    }
 
     // Check if organizerId is provided
     if (themeId) {
